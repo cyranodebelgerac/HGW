@@ -9,6 +9,35 @@ class Servant:
         self.hp = self.hp - saba_atk * modifier
 
 ###########################################################
+        
+
+saba001 = Servant("Artoria Pendragon", "Saber", 10000, 1000, "5")
+saba002 = Servant("EMIYA", "Archer", 8500, 900, "4")
+saba003 = Servant("Cu Chulainn", "Lancer", 8500, 900, "4")
+saba004 = Servant("Medusa", "Rider", 10000, 1000, "5")
+saba005 = Servant("Sasaki Kojirou", "Assassin", 9000, 1200, "4")
+saba006 = Servant("Medea", "Caster", 8500, 900, "4")
+saba007 = Servant("Heracles", "Berserker", 10000, 1000, "5")
+
+
+###########################################################
+
+
+def servant_selection():
+    choice = ""
+    while choice not in (saba001.name,saba002.name,saba003.name,saba004.name,saba005.name,saba006.name,saba007.name):
+        choice = input("Choose a servant: \n")
+    for x in (saba001,saba002,saba003,saba004,saba005,saba006,saba007):
+        if choice == x.name:
+            return x
+
+def enemy_selection():
+    choice = ""
+    while choice not in (saba001.name,saba002.name,saba003.name,saba004.name,saba005.name,saba006.name,saba007.name):
+        choice = input("Choose an enemy: \n")
+    for x in (saba001,saba002,saba003,saba004,saba005,saba006,saba007):
+        if choice == x.name:
+            return x
 
 def class_adv(saba_class, enemy_class):
     if saba_class == "Saber":
@@ -54,50 +83,25 @@ def class_adv(saba_class, enemy_class):
     
     return 1
 
-def servant_selection():
-    choice = ""
-    while choice not in (saba001.name,saba002.name,saba003.name,saba004.name,saba005.name,saba006.name,saba007.name):
-        choice = input("Choose a servant: \n")
-    for x in (saba001,saba002,saba003,saba004,saba005,saba006,saba007):
-        if choice == x.name:
-            return x
-
-def enemy_selection():
-    choice = ""
-    while choice not in (saba001.name,saba002.name,saba003.name,saba004.name,saba005.name,saba006.name,saba007.name):
-        choice = input("Choose an enemy: \n")
-    for x in (saba001,saba002,saba003,saba004,saba005,saba006,saba007):
-        if choice == x.name:
-            return x
-
             
 ###########################################################
 
 
-saba001 = Servant("Artoria Pendragon", "Saber", 10000, 1000, "5")
-saba002 = Servant("EMIYA", "Archer", 8500, 900, "4")
-saba003 = Servant("Cu Chulainn", "Lancer", 8500, 900, "4")
-saba004 = Servant("Medusa", "Rider", 10000, 1000, "5")
-saba005 = Servant("Sasaki Kojirou", "Assassin", 9000, 1200, "4")
-saba006 = Servant("Medea", "Caster", 8500, 900, "4")
-saba007 = Servant("Heracles", "Berserker", 10000, 1000, "5")
-
-
-###########################################################
-
 print("Welcome to the Holy Grail War!")
 
 player = servant_selection()
-
 enemy = enemy_selection()
 
 modifier = class_adv(player.servant_class, enemy.servant_class)
 enemy_modifier = class_adv(enemy.servant_class, player.servant_class)
 
 while player.hp > 0 or enemy.hp > 0:
+    print("*"*10)
     print("{} has {} HP left!".format(player.name, player.hp))
+    print("*"*10)
     print("{} has {} HP left!".format(enemy.name, enemy.hp))
     print("*"*10)
+    
     player.take_dmg(enemy.atk, modifier)
     print("{} attacks! {} takes {} damage!".format(enemy.name,player.name, enemy.atk * modifier))
     if player.hp <= 0:
