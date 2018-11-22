@@ -1,6 +1,5 @@
 import random
 
-###########################################################
 # set basic parameters for a servant. 
 class Servant:
     def __init__(self, name, servant_class, hp, atk, rarity):
@@ -13,8 +12,7 @@ class Servant:
         self.hp = int(self.hp - saba_atk * modifier)
     def heal(self, amount):
         self.hp =int(self.hp + amount)
-
-###########################################################
+        
 # list of servants
 saba = [
         Servant("Artoria Pendragon", "Saber", 10000, 1000, "5"), 
@@ -28,13 +26,11 @@ saba = [
         Servant("Angra Mainyu", "Avenger", 6000, 600, "3"),
         Servant("BB", "Moon Cancer", 10000, 1000, "4")
         ]
-
 # generates a string with all servants' names separated by a comma. Used in servant_select
 saba_list = ""
 for x in range(len(saba)):
     saba_list = saba_list + saba[x].name + ", "
 
-###########################################################
 # player inputs a servant name, determines that it's valid. Used at the beginning of the war.
 def servant_select():
     choice = "   "
@@ -60,8 +56,7 @@ def reg_adv_modifier(enemy_class, adv, disadv, berserker):
     if enemy_class in disadv:
         return 0.5
     if berserker:
-        return 1.5
-    
+        return 1.5  
 def class_adv(saba_class, enemy_class):
     if saba_class == "Saber":
         return reg_adv_modifier(enemy_class, "Archer", "Lancer", 1)
@@ -88,21 +83,17 @@ def class_adv(saba_class, enemy_class):
 def combat(player, enemy):
     modifier = class_adv(player.servant_class, enemy.servant_class)
     player.take_dmg(enemy.atk, modifier)
-    print("{} attacks! {} takes {} damage!".format(enemy.name,player.name, int(enemy.atk * modifier)))
-
+    print("{} attacks! {} takes {} damage!".format(enemy.name,player.name, int(enemy.atk * modifier))
 def victory(servant):
     if servant.hp <= 0:
         return 1
             
 ###########################################################
 print("Welcome to the Holy Grail War!")
-
 choice = "  "
 player = set_servant(servant_select())
 enemy = rand_servant()
-
 turn = 1
-
 while 1:
     print("*"*10 + "Turn {}".format(turn) + "*"*10)
     print("{} has {} HP left!".format(player.name, player.hp))
@@ -121,6 +112,5 @@ while 1:
     else:
         turn += 1
         input("")
-        
 print("---------------------")
 print("{} has won!".format(winner.name))
